@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Lecture Lens</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="login-view" class="login-view">
+      <section class="login-panel">
+        <div class="app-icon" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">LECTURE LENS</p>
+        <h1>Welcome back</h1>
+        <p class="login-copy">Sign in to your study desk.</p>
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input id="username" autocomplete="username" placeholder="student" required />
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="current-password" placeholder="Password" required />
+          <p id="login-error" class="inline-error" role="alert"></p>
+          <button class="button primary wide" type="submit">Sign In</button>
+        </form>
+      </section>
+    </main>
+
+    <main id="workspace-view" class="workspace hidden">
+      <aside class="sidebar">
+        <div class="sidebar-heading">
+          <div class="app-icon compact" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div><strong>Lecture Lens</strong><small>Political Philosophy</small></div>
+        </div>
+        <div class="sidebar-group">
+          <p class="sidebar-caption">LIBRARY</p>
+          <button class="sidebar-item selected" data-view="capture"><span class="symbol">＋</span> New Lecture</button>
+          <button class="sidebar-item" data-view="library"><span class="symbol">▤</span> All Lectures <span id="library-count" class="sidebar-count">0</span></button>
+        </div>
+        <div class="sidebar-bottom">
+          <button class="sidebar-item" data-view="settings"><span class="symbol">⚙</span> Settings</button>
+          <div class="account-row">
+            <div class="account-avatar">S</div>
+            <div class="account-info"><strong>Student</strong><small>Local account</small></div>
+            <button id="logout-button" class="icon-control" title="Sign out" aria-label="Sign out">↪</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="main-column">
+        <header class="toolbar">
+          <div class="toolbar-context"><span class="toolbar-dot"></span><span id="toolbar-section">New Lecture</span></div>
+          <div class="toolbar-actions">
+            <div id="toolbar-recording" class="toolbar-recording hidden"><span class="live-dot"></span><span>Recording</span><time id="toolbar-timer">00:00:00</time></div>
+            <button id="toolbar-record-button" class="button primary small"><span class="record-glyph"></span> Record</button>
+          </div>
+        </header>
+
+        <div id="capture-view" class="page-view">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">LECTURE</p>
+              <input id="lecture-title" class="title-input" value="Political Philosophy" aria-label="Lecture title" />
+            </div>
+            <span id="record-state" class="state-pill"><span class="state-dot"></span> Ready</span>
+          </div>
+
+          <section id="record-panel" class="record-panel" aria-label="Lecture recording controls">
+            <div class="record-panel-top">
+              <div class="record-identity">
+                <div id="record-emblem" class="record-emblem"><span></span></div>
+                <div><h2 id="record-heading">Ready when you are</h2><p id="record-description">Your recording stays active while Lecture Lens is minimized.</p></div>
+              </div>
+              <time id="record-timer" class="large-timer">00:00:00</time>
+            </div>
+            <div id="waveform" class="waveform" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="record-panel-bottom">
+              <div class="audio-meta"><span class="language-mark">SK</span><span>Slovak transcription</span><span class="meta-divider"></span><span id="audio-meta-status">Microphone ready</span></div>
+              <div class="record-actions">
+                <button id="record-button" class="button primary"><span class="record-glyph"></span> Start Recording</button>
+                <button id="stop-button" class="button stop hidden"><span class="stop-glyph"></span> Stop &amp; Transcribe</button>
+                <label class="button secondary import-button"><span class="import-glyph">↑</span> Import Audio<input id="audio-file" type="file" accept="audio/*" /></label>
+              </div>
+            </div>
+            <div id="drop-zone" class="drop-zone">Drop an audio file here to transcribe it</div>
+          </section>
+
+          <section id="result-section" class="result-section hidden">
+            <div class="section-heading">
+              <div><p class="eyebrow">SESSION NOTES</p><h2>Lecture notes</h2></div>
+              <button id="new-session-button" class="button secondary">New Lecture</button>
+            </div>
+            <div class="result-tabs" role="tablist">
+              <button class="result-tab selected" data-tab="summary" role="tab">Summary</button>
+              <button class="result-tab" data-tab="transcript" role="tab">Transcript</button>
+            </div>
+            <article id="summary-panel" class="result-paper"></article>
+            <article id="transcript-panel" class="result-paper hidden"></article>
+          </section>
+          <section id="empty-state" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">⌘</div>
+            <div><h2>Your lecture notes will appear here</h2><p>Record a lecture or import an audio file to create a transcript and study summary.</p></div>
+          </section>
+        </div>
+
+        <div id="library-view" class="page-view hidden">
+          <div class="page-heading"><div><p class="eyebrow">LIBRARY</p><h1>All Lectures</h1></div><button id="library-new-button" class="button primary"><span>＋</span> New Lecture</button></div>
+          <div id="library-list" class="library-list"></div>
+        </div>
+
+        <div id="settings-view" class="page-view hidden">
+          <div class="page-heading"><div><p class="eyebrow">PREFERENCES</p><h1>Settings</h1></div></div>
+          <section class="settings-section">
+            <div class="settings-heading"><div><h2>AI Services</h2><p>Keys are stored encrypted on this device.</p></div></div>
+            <form id="settings-form" class="settings-form">
+              <div class="shared-service">
+                <div><strong>ElevenLabs transcription</strong><p>Slovak speech-to-text · Scribe</p></div>
+                <span id="elevenlabs-key-status" class="key-status">Checking…</span>
+              </div>
+              <p class="field-note">The shared service key belongs on the class server, never in the downloadable app.</p>
+              <label for="octava-key">OctavApi key <span id="octava-key-status" class="key-status">Optional</span></label>
+              <div class="key-input-row"><input id="octava-key" type="password" autocomplete="off" placeholder="Paste your OctavApi key" /><button class="button secondary" type="button" data-clear-key="octava">Remove</button></div>
+              <p class="field-note">Summaries use <code>gpt-6-luna</code> through the class API gateway.</p>
+              <div class="provider-details"><span>Base URL</span><code>https://octavapi.shop/v1</code><span>Model</span><code>gpt-6-luna</code></div>
+              <div class="settings-footer"><span id="settings-message" role="status"></span><button class="button primary" type="submit">Save API Keys</button></div>
+            </form>
+          </section>
+          <section class="settings-section app-settings">
+            <div class="settings-heading"><div><h2>Recording</h2><p>The floating control stays above other windows while recording.</p></div><span id="floating-status" class="state-pill">Always on top</span></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <main id="recording-overlay" class="recording-overlay hidden">
+      <span class="overlay-live" title="Recording"><i></i></span>
+      <div class="overlay-meter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <time id="overlay-timer">00:00:00</time>
+      <div class="overlay-actions">
+        <button id="overlay-open" aria-label="Open Lecture Lens" title="Open Lecture Lens"><span class="overlay-app-mark">L</span></button>
+        <button id="overlay-stop" aria-label="Stop recording" title="Stop recording"><span></span></button>
+      </div>
+      <span id="overlay-title" class="visually-hidden">Recording lecture</span>
+      <span id="overlay-status" class="visually-hidden">Microphone active</span>
+    </main>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

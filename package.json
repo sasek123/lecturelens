@@ -1,0 +1,45 @@
+{
+  "name": "lecture-lens",
+  "version": "1.0.0",
+  "description": "A focused desktop companion for recording and summarizing university lectures in Slovak.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac dmg --universal",
+    "build:win": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.lecturelens.app",
+    "productName": "Lecture Lens",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "styles.css",
+      "README.md",
+      ".env.example"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.education",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Lecture Lens needs microphone access to record your lectures."
+      }
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}
